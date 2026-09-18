@@ -136,7 +136,7 @@ input[type=search]:focus-visible{border-color:var(--stamp);box-shadow:0 0 0 3px 
 
   <div class="searchbox">
     <input type="search" id="q" autocomplete="off" spellcheck="false"
-           placeholder="Улица и дом — например, Советская 84">
+           placeholder="Улица и дом — например, Новая 11">
     <p class="hint" id="hint">Введите улицу и номер дома. Можно искать и по номеру участка.</p>
   </div>
 
@@ -362,8 +362,8 @@ function card(u, matchHtml, extraHtml){
 }
 
 /* стартовый экран: примеры запросов + все участки округа */
-const EXAMPLES = ['Советская 84','Ворошилова 143','Протвино, Дружбы 14',
-                  'Пущино, Грузовая','д. Балково','2396'];
+const EXAMPLES = ['ул. Новая, 11','Новый пр-д, 7','д. Глебово, дом 7','ул. Депутатская, 11',
+                  'д. Воскресенки','д. Новая','п. Мирный','ул. Победы'];
 function startScreen(){
   const chips = EXAMPLES.map(s=>'<button class="chip" data-q="' + esc(s) + '">' + esc(s) + '</button>').join('');
   const list = DATA.slice().sort((a,b)=>a.num.localeCompare(b.num,'ru',{numeric:true}))
