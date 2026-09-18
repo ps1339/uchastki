@@ -93,6 +93,25 @@ input[type=search]:focus-visible{border-color:var(--stamp);box-shadow:0 0 0 3px 
 .alluik .n{flex:0 0 52px;font-weight:600;color:var(--stamp);font-variant-numeric:tabular-nums}
 .alluik .a{flex:1;min-width:0;color:var(--muted)}
 
+.about{margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+.about h2{margin:0 0 13px;font:700 21px/1.25 var(--serif);color:var(--ink);letter-spacing:-.01em}
+.about p{margin:0 0 11px;font-size:14.5px;line-height:1.62;color:var(--muted);max-width:60ch}
+.about p b{color:var(--ink);font-weight:600}
+.social{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.social a{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card);
+  color:var(--stamp);text-decoration:none;font-weight:600;font-size:14px}
+.social a:hover{border-color:var(--stamp);background:var(--stamp-soft)}
+.social a:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+
+.alllist{margin-top:14px}
+.alllist summary{cursor:pointer;list-style:none;padding:7px 0;font:600 13px var(--sans);
+  text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.alllist summary::-webkit-details-marker{display:none}
+.alllist summary::before{content:'+ ';font-family:var(--sans)}
+.alllist[open] summary::before{content:'– '}
+.alllist summary:hover{color:var(--stamp)}
+.alllist summary:focus-visible{outline:2px solid var(--stamp);outline-offset:3px;border-radius:4px}
+
 .foot{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
   color:var(--muted);font-size:12.5px;line-height:1.55}
 .foot p{margin:6px 0}
@@ -122,6 +141,19 @@ input[type=search]:focus-visible{border-color:var(--stamp);box-shadow:0 0 0 3px 
   </div>
 
   <div id="out"></div>
+
+  <section class="about">
+    <h2>О проекте</h2>
+    <p>Где находится ваш избирательный участок? Мы создали этот сервис, чтобы найти ответ было просто: введите свой адрес — и получите номер участка и его адрес. Сайт работает с телефона, планшета и компьютера.</p>
+    <p>Проект подготовила редакция <b>«Серпухов | Новости, Подслушано»</b>. Мы рассказываем, что происходит в городе, разбираем важные для жителей вопросы и создаём полезные сервисы.</p>
+    <p>Будем на связи! Подписывайтесь на нас там, где вам удобно. Читайте городские новости, делитесь своими историями и участвуйте в обсуждениях.</p>
+    <nav class="social" aria-label="Редакция в соцсетях">
+      <a href="https://t.me/serpukhov" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://vk.ru/sluh_serp" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="https://max.ru/sluh_serp" target="_blank" rel="noopener">MAX</a>
+      <a href="https://ok.ru/bigserpuhov" target="_blank" rel="noopener">Одноклассники</a>
+    </nav>
+  </section>
 
   <footer class="foot">
     <p>Источник: решение ТИК городского округа Серпухов <b>№ 2337 от 25.06.2026</b> «Избирательные участки для голосования и подсчёта голосов избирателей на территории муниципального образования „Городской округ Серпухов Московской области“». Выборы депутатов Государственной Думы девятого созыва и депутатов Московской областной Думы.</p>
@@ -337,8 +369,8 @@ function startScreen(){
   const list = DATA.slice().sort((a,b)=>a.num.localeCompare(b.num,'ru',{numeric:true}))
     .map(u=>'<li><span class="n">' + esc(u.num) + '</span><span class="a">' + esc(cleanAddr(u.addr)) + '</span></li>').join('');
   return '<div class="start"><h2>Примеры</h2>' + chips +
-         '<h2>Все участки округа — ' + DATA.length + '</h2>' +
-         '<ol class="alluik">' + list + '</ol></div>';
+         '<details class="alllist"><summary>Все участки округа — ' + DATA.length + '</summary>' +
+         '<ol class="alluik">' + list + '</ol></details></div>';
 }
 function groupCard(g, house, showHouses){
   const lines = g.entries.map(e=>{
